@@ -757,7 +757,10 @@ class Storage(object):
 
         if p:
             p[0].stdout.close()
-            p[0].terminate()
+            try:
+                p[0].terminate()
+            except WindowsError:
+                pass
             p[0].wait()
 
     def last_change(self, sha, path, historian=None):
