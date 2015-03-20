@@ -741,7 +741,10 @@ class Storage(object):
                         except ValueError:
                             break
             f.close()
-            p[0].terminate()
+            try:
+                p[0].terminate()
+            except WindowsError:
+                pass
             p[0].wait()
             p[:] = []
             while True: yield None
